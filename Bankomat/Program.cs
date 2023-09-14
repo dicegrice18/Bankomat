@@ -9,9 +9,9 @@ namespace Bankomat
         static void Main(string[] args)
         {
             #region Creazione ContiCorrenti
-            BankAccount c1 = new BankAccount("Davide03", "1234", 1000, "IT84I0300203280838287694556");
-            BankAccount c2 = new BankAccount("Samu04", "5678", 1000, "IT17K0300203280842843543212");
-            BankAccount c3 = new BankAccount("Carlos", "9012", 1000, "ES4520381612736729323146");
+            BankAccount c1 = new BankAccount("user1", "user1", 1000, "user1");
+            BankAccount c2 = new BankAccount("user2", "user2", 1000, "user2");
+            BankAccount c3 = new BankAccount("user3", "user3", 1000, "user3");
             List<BankAccount> ContiCorrenti = new List<BankAccount>();
             {
                 ContiCorrenti.Add(c1);

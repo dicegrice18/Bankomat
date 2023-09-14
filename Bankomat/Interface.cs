@@ -36,6 +36,7 @@ namespace Bankomat
                     if (utente.Username == user && utente.Password == pass)
                     {
                         accessoRiuscito = true;
+                        BankAccount UtenteAttuale = utente;
                         break; // Esci dal ciclo se le credenziali sono corrette per almeno un utente
                     }
                 }
@@ -43,16 +44,8 @@ namespace Bankomat
                 if (!accessoRiuscito)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Credenziali non valide. Vuoi reinserirle? (Si/No)");
-                    Console.ResetColor();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    string risposta = Console.ReadLine();
-                    Console.ResetColor();
-                    if (risposta.ToLower() != "si")
-                    {
-                        Console.WriteLine("Accesso negato.");
-                        break; // Interrompi il ciclo se l'utente non vuole reinserire le credenziali
-                    }
+                    Console.WriteLine("Credenziali non valide!");
+                    Console.ResetColor();          
                 }
                 else
                 {
@@ -95,21 +88,28 @@ namespace Bankomat
                         }
                         else
                         {
-                            Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo}\n");
-                            Console.WriteLine("Inserisci l'importo da versare:");
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        double importoVersamento = Convert.ToDouble(Console.ReadLine());
-                        Console.ResetColor();
-                            if (importoVersamento <= 0)
+                            try
                             {
-                                Console.WriteLine("L'importo deve essere maggiore di zero.");
-                            }
-                            else
-                            {
-                                contoVersamento.Versamento(contoVersamento, importoVersamento);
                                 Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo}\n");
+                                Console.WriteLine("Inserisci l'importo da versare:");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                double importoVersamento = double.Parse(Console.ReadLine());
+                                Console.ResetColor();
+                                if (importoVersamento.GetType() != typeof(double))
+                                {
+                                    Console.WriteLine("Hai sbagliato a scrivere l'importo.");
+                                }
+                                else if (importoVersamento <= 0)
+                                {
+                                    Console.WriteLine("L'importo deve essere maggiore di zero.");
+                                }
+                                else
+                                {
+                                    contoVersamento.Versamento(contoVersamento, importoVersamento);
+                                    Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo}\n");
 
-                            }
+                                }
+                            } catch(FormatException) { Console.WriteLine("Importo errato"); }
                         }
                     Console.WriteLine("\nPremi Invio per tornare al menu principale.");
                     Console.ReadLine(); // Torna al menu principale
@@ -129,26 +129,33 @@ namespace Bankomat
                         }
                         else
                         {
-                            Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo}\n");
-                            Console.WriteLine("Inserisci l'importo da prelevare:");
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        double importoPrelievo = Convert.ToDouble(Console.ReadLine());
-                        Console.ResetColor();
-
-                            if (importoPrelievo <= 0)
-                            {
-                                Console.WriteLine("L'importo deve essere maggiore di zero.");
-                            }
-                            else if (importoPrelievo > contoPrelievo.Saldo)
-                            {
-                                Console.WriteLine("Saldo insufficiente per il prelievo.");
-                            }
-                            else
-                            {
-                                contoPrelievo.Prelievo(contoPrelievo, importoPrelievo);
+                            try {
                                 Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo}\n");
+                                Console.WriteLine("Inserisci l'importo da prelevare:");
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                double importoPrelievo = Convert.ToDouble(Console.ReadLine());
+                                Console.ResetColor();
 
-                            }
+                                if (importoPrelievo.GetType() != typeof(double))
+                                {
+                                    Console.WriteLine("Hai sbagliato a scrivere l'importo.");
+                                }
+                                else if (importoPrelievo <= 0)
+                                {
+                                    Console.WriteLine("L'importo deve essere maggiore di zero.");
+                                }
+                                else if (importoPrelievo > contoPrelievo.Saldo)
+                                {
+                                    Console.WriteLine("Saldo insufficiente per il prelievo.");
+                                }
+                                else
+                                {
+                                    contoPrelievo.Prelievo(contoPrelievo, importoPrelievo);
+                                    Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo}\n");
+
+                                }
+                            } catch (FormatException) { Console.WriteLine("Importo errato"); }
+                        
                         }
                     Console.WriteLine("\nPremi Invio per tornare al menu principale.");
                     Console.ReadLine(); // Torna al menu principale
