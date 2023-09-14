@@ -90,7 +90,7 @@ namespace Bankomat
                         {
                             try
                             {
-                                Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo}\n");
+                                Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo} Eur\n");
                                 Console.WriteLine("Inserisci l'importo da versare:");
                                 Console.ForegroundColor = ConsoleColor.Cyan;
                                 double importoVersamento = double.Parse(Console.ReadLine());
@@ -106,7 +106,7 @@ namespace Bankomat
                                 else
                                 {
                                     contoVersamento.Versamento(contoVersamento, importoVersamento);
-                                    Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo}\n");
+                                    Console.WriteLine($"\nSaldo Disponibile: {contoVersamento.Saldo} Eur\n");
 
                                 }
                             } catch(FormatException) { Console.WriteLine("Importo errato"); }
@@ -130,7 +130,7 @@ namespace Bankomat
                         else
                         {
                             try {
-                                Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo}\n");
+                                Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo} Eur\n");
                                 Console.WriteLine("Inserisci l'importo da prelevare:");
                                 Console.ForegroundColor = ConsoleColor.Cyan;
                                 double importoPrelievo = Convert.ToDouble(Console.ReadLine());
@@ -151,7 +151,7 @@ namespace Bankomat
                                 else
                                 {
                                     contoPrelievo.Prelievo(contoPrelievo, importoPrelievo);
-                                    Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo}\n");
+                                    Console.WriteLine($"\nSaldo Disponibile: {contoPrelievo.Saldo} Eur\n");
 
                                 }
                             } catch (FormatException) { Console.WriteLine("Importo errato"); }
@@ -175,7 +175,7 @@ namespace Bankomat
                         else
                         {
                             DateTime dataOraCorrente = DateTime.Now;
-                            Console.WriteLine($"\nSaldo Disponibile: {contoSaldo.Saldo}");
+                            Console.WriteLine($"\nSaldo Disponibile: {contoSaldo.Saldo} Eur");
                             Console.WriteLine($"{dataOraCorrente}\n");
                     }
                     Console.WriteLine("\nPremi Invio per tornare al menu principale.");
